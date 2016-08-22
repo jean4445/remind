@@ -109,7 +109,7 @@ app.get('/api/query', function(request, response) {
 		}
 	});
 });
-//搜尋資料
+//搜尋使用者資料
 app.get('/api/searchdata', function(request, response) {
       var collection = myDB.collection('member');
       collection.find({}).toArray(function(err, docs) {
@@ -140,5 +140,19 @@ app.get('/api/addremind',function(request,response){
 		}
 	
 	});
+});
+
+//搜尋提醒資料
+app.get('/api/searchreminddata', function(request, response) {
+      var collection = myDB.collection('remind');
+      collection.find({}).toArray(function(err, docs) {
+      if (err) {
+          response.status(406).end();
+       } else {
+         response.type('application/json');
+         response.status(200).send(docs);
+         response.end();
+       }
+   });
 });
 app.listen(process.env.PORT||5000);
